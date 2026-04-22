@@ -50,8 +50,10 @@ namespace FinanceTrace
                             Console.WriteLine("Reset done.");
                         }
                         else
+                        {
                             Console.WriteLine("Reset cancelled");
-
+                        }
+                      
                         break;
 
                     case "5":
@@ -87,12 +89,12 @@ namespace FinanceTrace
                 Console.Write(prompt);
                 string? input = Console.ReadLine();
 
-                if (decimal.TryParse(input, out decimal amount) && amount > 0)
-                    if (amount < MaxAmount)
-                        return amount;
-                   
-
-                Console.WriteLine("  Please enter a positive number (e.g. 1500.50).");
+                if (decimal.TryParse(input, out decimal amount) && amount > 0 && amount <= MaxAmount)
+                {
+                    return amount;
+                }
+                 
+                Console.WriteLine($"  Please enter a positive number (e.g. 1500.50) and {MaxAmount:N0} .");
             }
         }
 
@@ -100,7 +102,7 @@ namespace FinanceTrace
 
         static bool Confirm(string question)
         {
-            Console.WriteLine($"{question} (y/n): ");
+            Console.Write($"{question} (y/n): ");
             string? answer = Console.ReadLine();
             return answer?.ToLower() == "y";
         }
