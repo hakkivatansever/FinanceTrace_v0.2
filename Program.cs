@@ -7,6 +7,7 @@ namespace FinanceTrace
         // Sabitler — programın sabit değerleri
         const string AppName = "FinanceTrace";
         const string Version = "0.2";
+        const decimal MaxAmount = 1_000_000m;
 
         static void Main(string[] args)
         {
@@ -29,12 +30,12 @@ namespace FinanceTrace
                 {
                     case "1":
                         totalIncome += ReadAmount("Income amount: ");
-                        Console.WriteLine($"✅ Income added. Total: {totalIncome:C}");
+                        Console.WriteLine($"Income added. Total: {totalIncome:C}");
                         break;
 
                     case "2":
                         totalOutcome += ReadAmount("Outcome amount: ");
-                        Console.WriteLine($"✅ Outcome added. Total: {totalOutcome:C}");
+                        Console.WriteLine($" Outcome added. Total: {totalOutcome:C}");
                         break;
 
                     case "3":
@@ -42,12 +43,24 @@ namespace FinanceTrace
                         break;
 
                     case "4":
+                        if(Confirm("Are you sure you want to reset?"))
+                        {
+                            totalIncome = 0;
+                            totalOutcome = 0;
+                            Console.WriteLine("Reset done.");
+                        }
+                        else
+                            Console.WriteLine("Reset cancelled");
+
+                        break;
+
+                    case "5":
                         running = false;
                         Console.WriteLine("Goodbye!");
                         break;
 
                     default:
-                        Console.WriteLine("❌ Invalid choice. Pick 1-4.");
+                        Console.WriteLine(" Invalid choice. Pick 1-5.");
                         break;
                 }
                 Console.WriteLine();
@@ -61,7 +74,8 @@ namespace FinanceTrace
             Console.WriteLine("1) Add income");
             Console.WriteLine("2) Add outcome");
             Console.WriteLine("3) Show summary");
-            Console.WriteLine("4) Exit");
+            Console.WriteLine("4) Reset All");
+            Console.WriteLine("5) Exit");
             Console.Write("Choice: ");
         }
 
@@ -74,11 +88,25 @@ namespace FinanceTrace
                 string? input = Console.ReadLine();
 
                 if (decimal.TryParse(input, out decimal amount) && amount > 0)
-                    return amount;
+                    if (amount < MaxAmount)
+                        return amount;
+                   
 
-                Console.WriteLine("⚠️  Please enter a positive number (e.g. 1500.50).");
+                Console.WriteLine("  Please enter a positive number (e.g. 1500.50).");
             }
         }
+
+       // Soru Soran Method
+
+        static bool Confirm(string question)
+        {
+            Console.WriteLine($"{question} (y/n): ");
+            string? answer = Console.ReadLine();
+            return answer?.ToLower() == "y";
+        }
+
+       
+
 
         // Özet raporu basan metot
         static void ShowSummary(string? name, decimal income, decimal outcome)
