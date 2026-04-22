@@ -3,7 +3,7 @@
 > Simple personal finance tracker built with C# and .NET 8.  
 > A learning project to practice core C# concepts: OOP, LINQ, and file I/O.
 
-![App Screenshot](screenshot.png)
+![App Screenshot](screenshot.PNG)
 
 ---
 
