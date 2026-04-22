@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using FinanceTrace_v0._2;
+using System.Text;
 
 namespace FinanceTrace
 {
@@ -12,6 +13,18 @@ namespace FinanceTrace
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
+
+            // TEST
+
+            //var test = new Transaction(500, "Maaş", "İş", TransactionType.Income);
+            //Console.WriteLine($"Miktar: {test.Amount:C}");
+            //Console.WriteLine($"Açıklama: {test.Description}");
+            //Console.WriteLine($"Kategori: {test.Category}");
+            //Console.WriteLine($"Tür: {test.Type}");
+            //Console.WriteLine($"Date: {test.Date}");
+            //return;
+
+            // TEST END
 
             decimal totalIncome = 0;
             decimal totalOutcome = 0;
